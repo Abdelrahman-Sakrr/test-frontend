@@ -169,12 +169,6 @@ const styles = StyleSheet.create({
     height: 70,
 
     backgroundColor: Colors.white,
-
-    shadowColor: Colors.black,
-    shadowOffset: { width: 0, height: -2 },
-    shadowOpacity: 0.08,
-    shadowRadius: 10,
-    elevation: 12,
   },
   icon: {
     width: 24,
