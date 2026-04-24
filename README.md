@@ -2,6 +2,11 @@
 
 A pixel-faithful implementation of the Lenme Borrow screen, built with Expo Router, React Hook Form, Zod validation, and persistent auth via SecureStore.
 
+# Download APK
+
+https://github.com/Abdelrahman-Sakrr/test-frontend/releases/tag/apk
+
+
 ---
 
 ## Table of Contents
@@ -169,4 +174,4 @@ All colors are defined in `constants/Colors.ts` as a flat object. The two brand 
 
 ## Assumptions Made
 
-- **Authentication is mocked.** on login we assume that the token is the email 
+- **Authentication is mocked.** on login we assume that the token is the email
