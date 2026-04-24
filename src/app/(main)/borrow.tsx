@@ -5,6 +5,7 @@ import {
   Text,
   StyleSheet,
   StatusBar,
+  TouchableOpacity,
 } from "react-native";
 import { Colors } from "@/constants/colors";
 import { BorrowHeader } from "@/components/BorrowHeader";
@@ -14,17 +15,25 @@ import { TotalAmountRow } from "@/components/TotalAmountrow";
 import { Banner } from "@/components/common/Banner";
 import { AvailableCreditCard } from "@/components/AvailableCreditCard";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { Ionicons } from "@expo/vector-icons";
+import { useAuth } from "@/context/AuthContext";
+import { useRouter } from "expo-router";
 
 const FEE_RATE = 0.062;
 const amount = 950;
 
 export default function BorrowScreen() {
+  const router = useRouter();
+  const { logout } = useAuth();
   const { bottom, top } = useSafeAreaInsets();
   const [cryptoEnabled, setCryptoEnabled] = useState(false);
 
   const fees = parseFloat((amount * FEE_RATE).toFixed(2));
   const maxAmount = cryptoEnabled ? 10000 : 5000;
-
+  const handleLogout = async () => {
+    await logout();
+    router.replace("/(auth)/login");
+  }
   return (
     <View style={styles.safeArea}>
       <StatusBar barStyle="light-content" backgroundColor={Colors.primary} />
@@ -56,7 +65,7 @@ export default function BorrowScreen() {
             min={50}
             max={maxAmount}
             defaultValue={amount}
-            
+
           />
 
           <TotalAmountRow
@@ -75,6 +84,18 @@ export default function BorrowScreen() {
         />
 
       </ScrollView>
+      <TouchableOpacity
+        style={[
+          styles.logoutButton,
+          {
+            bottom: bottom + 16,
+          },
+        ]}
+        onPress={handleLogout}
+        activeOpacity={0.8}
+      >
+        <Ionicons name="log-out-outline" size={22} color={Colors.white} />
+      </TouchableOpacity>
     </View>
   );
 }
@@ -107,5 +128,21 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     color: Colors.dark,
     marginBottom: 14,
+  },
+  logoutButton: {
+    position: "absolute",
+    right: 16,
+    width: 52,
+    height: 52,
+    borderRadius: 26,
+    backgroundColor: Colors.primary,
+    alignItems: "center",
+    justifyContent: "center",
+
+    shadowColor: Colors.black,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.2,
+    shadowRadius: 6,
+    elevation: 6,
   },
 });

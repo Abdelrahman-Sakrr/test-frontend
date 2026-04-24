@@ -169,12 +169,4 @@ All colors are defined in `constants/Colors.ts` as a flat object. The two brand 
 
 ## Assumptions Made
 
-- **Authentication is mocked.** The login screen simulates an 800ms network delay and stores a hardcoded fake token. In production, replace the `setTimeout` block in `onSubmit` with your real API call and pass the token returned by your server into `signIn(token)`.
-
-- **Single protected route.** Only `/(main)/borrow` is currently behind the auth guard. As the app grows, all screens added under `app/(main)/` are automatically protected because the `NavigationGuard` checks `segments[0] === "(auth)"` — anything outside that group requires a valid token.
-
-- **Token = session.** The persisted value is treated as a binary "logged in / not logged in" signal. No token expiry, refresh logic, or JWT decoding is implemented. These should be added once a real backend is integrated.
-
-- **Sign-out is on the menu button.** The hamburger icon in `BorrowHeader` calls `signOut()` as a placeholder. In a real app this would live in a drawer or settings screen.
-
-- **Expo SDK 51+.** The project assumes a modern Expo SDK where Expo Router v3, `expo-secure-store` v13+, and file-based routing are all stable. Older SDK versions may require different package versions or configuration.
+- **Authentication is mocked.** on login we assume that the token is the email 
